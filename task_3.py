@@ -20,17 +20,19 @@ class PointsForMeters:
             return meters * 0.5
 
 
-class TotalPoints(PointsForPlace, PointsForMeters):
-    def __init__(self):
-        super().__init__()
-        self.total = 0
+class TotalPoints:
+
+    def get_points_for_place(self, place):
+        return PointsForPlace.get_points_for_place(place)
+
+    def get_points_for_meters(self, meters):
+        return PointsForMeters.get_points_for_meters(meters)
 
     def get_total_points(self, meters, place):
         points_for_place = self.get_points_for_place(place)
         points_for_meters = self.get_points_for_meters(meters)
+        return points_for_place + points_for_meters
 
-        self.total = points_for_place + points_for_meters
-        return self.total
 
 points_for_place = PointsForPlace()
 print(points_for_place.get_points_for_place(10))
